@@ -1,0 +1,9 @@
+Hello, welcome to Python programming!
+This is a simple file for reading practice.
+We are learning how to use the read module in Python.
+
+Line 4: Python makes file handling easy.
+Line 5: File I/O operations are essential for data processing.
+Line 6: Keep practicing to get better!
+
+Good luck and happy coding!
