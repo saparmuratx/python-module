@@ -1,4 +1,5 @@
-Hello, welcome to Python programming!
+qwe
+, welcome to Python programming!
 This is a simple file for reading practice.
 We are learning how to use the read module in Python.
 
@@ -7,3 +8,15 @@ Line 5: File I/O operations are essential for data processing.
 Line 6: Keep practicing to get better!
 
 Good luck and happy coding!
+Add this to end of fileAdd this to end of fileAdd this to end of file
+Add this to end of file
+Add this to end of file
+NEW Add this to end of file
+NEW Add this to end of file
+Hello Python
+Hello Python
+The last line 
+qwe
+qwe
+qwe
+qwe
