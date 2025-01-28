@@ -20,7 +20,7 @@ while number_of_lines <= 0:
 print("Line to append: " + line_to_append)
 print("Number of lines to print: " + str(number_of_lines))
 
-file = open("C:/Users/Saparmurat/Desktop/Python/L3/data.txt", "r+")
+file = open("data.txt", "r+")
 
 
 for i in range(number_of_lines):
