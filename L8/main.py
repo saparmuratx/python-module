@@ -1,21 +1,45 @@
 import re
+import csv
 
 pair_regex = "[A-Z]{3}/[A-Z]{3}"
 
-exchange_rates = {
-    "1" :{"currency_pair":"EUR/USD", "exchange_rate":  1.03},
-    "2" :{"currency_pair":"EUR/CHY", "exchange_rate": 7.54},
-    "3" :{"currency_pair":"EUR/JPY", "exchange_rate":157.26},
-}
+def read_exchange_rates():
+    res = dict()
+
+    with open("data.csv", "r") as data_file:
+        csv_reader = csv.reader(data_file)
+
+        next(csv_reader)
+
+        for row in csv_reader:
+            index, pair, rate = tuple(row)
+            res[index] = {'currency_pair': pair, 'exchange_rate': float(rate)}
+
+        return res
+
+
+def write_exchange_rate(key, pair, rate):
+    with open("data.csv", "a", newline='') as data_file:
+        csv_writer = csv.writer(data_file)
+
+        csv_writer.writerow([key, pair, rate])
+
+    var = 0
+
+    def inline_function():
+
+        pass
+    
+
+exchange_rates = read_exchange_rates()
 
 def show_available_pairs():
     print("AVAILABLE PAIRS:")
     print("0: ADD NEW EXCHANGE RATE")
     for index in exchange_rates:
         print(f"{index}: CURRENCY {exchange_rates[index]["currency_pair"]} | RATE {exchange_rates[index]["exchange_rate"]}")
+    print("X: TO EXIT")
 
-def add_new_exchange_rate():
-    pass
 
 def get_valid_number(mn=0):
     value = None
@@ -24,7 +48,6 @@ def get_valid_number(mn=0):
             value = float(input("Enter Value:"))
         except ValueError as err:
             print("ENTER A VALID NUMBER!")
-            # value = 0
             continue
         
         if value <= mn:
@@ -71,6 +94,11 @@ while True:
 
     while not currency_pair_number:
         currency_pair_number = input("Currency Pair:")
+
+        if currency_pair_number.upper() == 'X':
+            print("EXITED WITH GRACE")
+            exit()
+
         if not currency_pair_number in exchange_rates and currency_pair_number != "0":
             print("ENTER A VALID CURRENCY PAIR!")
             currency_pair_number = ""
@@ -79,15 +107,15 @@ while True:
     if currency_pair_number == "0":
         pair = get_valid_pair()
         ex_rate = get_valid_number()
+        key = str(len(exchange_rates) + 1)
 
-        exchange_rates[str(len(exchange_rates) + 1)] = {"currency_pair":pair, "exchange_rate":ex_rate}
+        exchange_rates[key] = {"currency_pair":pair, "exchange_rate":ex_rate}
+        
+        write_exchange_rate(key, pair, ex_rate)
 
         currency_pair_number = ""
         value = 0
         continue
-
-
-    # VALUE: 2
 
     value = get_valid_number(0)
 
@@ -95,7 +123,7 @@ while True:
 
     result = rate * value
 
-    print(f"Result for pair {exchange_rates[currency_pair_number]["currency_pair"]}: {result} \n")
+    print(f"Result for pair {exchange_rates[currency_pair_number]["currency_pair"]}: {result:.3f} \n")
 
     currency_pair_number = ""
     value = 0
